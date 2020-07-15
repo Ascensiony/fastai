@@ -242,10 +242,8 @@ def validate(stepper, dl, metrics, epoch, seq_first=False, validate_skip = 0):
             res.append([to_np(f(datafy(preds), datafy(y))) for f in metrics])
     if hasattr(loss, "__len__"):
 #         return [np.average(loss, 0, weights=batch_cnts)[0]] + list(np.average(np.stack(res), 0, weights=batch_cnts))
-        print(len(loss))
-        return [np.average(loss, 0, weights=batch_cnts)] + list(np.average(np.stack(res), 0, weights=batch_cnts))
-    else:
-        return [np.average(loss, 0, weights=batch_cnts)] + list(np.average(np.stack(res), 0, weights=batch_cnts))
+#         print(len(loss))
+    return [np.average(loss, 0, weights=batch_cnts)] + list(np.average(np.stack(res), 0, weights=batch_cnts))
 
 def get_prediction(x):
     if is_listy(x): x=x[0]
