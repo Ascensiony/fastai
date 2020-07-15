@@ -241,7 +241,9 @@ def validate(stepper, dl, metrics, epoch, seq_first=False, validate_skip = 0):
             loss.append(to_np(l))
             res.append([to_np(f(datafy(preds), datafy(y))) for f in metrics])
     if hasattr(loss, "__len__"):
-        return [np.average(loss, 0, weights=batch_cnts)[0]] + list(np.average(np.stack(res), 0, weights=batch_cnts))
+#         return [np.average(loss, 0, weights=batch_cnts)[0]] + list(np.average(np.stack(res), 0, weights=batch_cnts))
+        print(len(loss))
+        return [np.average(loss, 0, weights=batch_cnts)] + list(np.average(np.stack(res), 0, weights=batch_cnts))
     else:
         return [np.average(loss, 0, weights=batch_cnts)] + list(np.average(np.stack(res), 0, weights=batch_cnts))
 
