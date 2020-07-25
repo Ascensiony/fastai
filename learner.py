@@ -342,7 +342,7 @@ class Learner():
         self.save('tmp')
         layer_opt = self.get_layer_opt(start_lr, wds)
         self.sched = LR_Finder(layer_opt, len(self.data.trn_dl), end_lr, linear=linear)
-        self.fit_gen(self.model, self.data.cpu(), layer_opt, 1, **kwargs) # ??
+        self.fit_gen(self.model.cpu(), self.data, layer_opt, 1, **kwargs) # ??
         self.load('tmp')
 
     def lr_find2(self, start_lr=1e-5, end_lr=10, num_it = 100, wds=None, linear=False, stop_dv=True, **kwargs):
