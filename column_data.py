@@ -149,11 +149,11 @@ class MixedInputModel(nn.Module):
         x = self.outp(x)
         if not self.is_reg:
             if self.is_multi:
-                x = F.sigmoid(x)
+                x = torch.sigmoid(x)
             else:
                 x = F.log_softmax(x)
         elif self.y_range:
-            x = F.sigmoid(x)
+            x = torch.sigmoid(x)
             x = x*(self.y_range[1] - self.y_range[0])
             x = x+self.y_range[0]
         return x
@@ -235,7 +235,7 @@ class EmbeddingDotBias(nn.Module):
     def forward(self, users, items):
         um = self.u(users)* self.i(items)
         res = um.sum(1) + self.ub(users).squeeze() + self.ib(items).squeeze()
-        return F.sigmoid(res) * (self.max_score-self.min_score) + self.min_score
+        return torch.sigmoid(res) * (self.max_score-self.min_score) + self.min_score
 
 
 class CollabFilterLearner(Learner):
